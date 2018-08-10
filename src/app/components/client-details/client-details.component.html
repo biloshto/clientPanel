@@ -1,0 +1,64 @@
+<!-- Clients are also going to have details page, so that we can see further information on them, we can see the edit button, the edit button, all that stuff. -->
+
+<div class="row">
+  <div class="col-md-6">
+    <a routerLink="/" class="btn btn-link"><i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard</a>
+  </div>
+  <div class="col-md-6">
+    <div class="btn-group pull-right">
+      <a [routerLink]="['/edit-client/'+id]" class="btn btn-secondary">Edit</a>
+      <button type="button" class="btn btn-danger" (click)="onDeleteClick()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- check the client property to make sure that something actually went in to it -->
+<div *ngIf="client" class="card">
+  <h3 class="card-header">{{client.firstName}} {{client.lastName}}</h3>
+  <br>
+  <div class="card-block">
+    <div class="row container">
+      <div class="col-md-8">
+        <h4>Client ID: {{id}}</h4>
+      </div>
+
+      <div class="col-md-4">
+        <h3 class="pull-right">
+          Balance:
+          <!-- property binding: if the client has balance we want the text to be red, and if the balance is 0 then we want the text to be green -->
+          <span
+            [class.text-danger]="hasBalance"
+            [class.text-success]="!hasBalance"
+          >
+            {{client.balance | currency:"USD":symbol }}
+          </span>
+          <small>
+            <!-- toggle the showBalanceUpdateInput property -->
+            <a (click)="showBalanceUpdateInput = !showBalanceUpdateInput"><i class="fa fa-pencil"></i></a>
+          </small>
+        </h3>
+        <!-- we floated this to the right so we just want to clear it -->
+        <div class="clearfix">
+          <form *ngIf="showBalanceUpdateInput" (submit)="updateBalance(id)" class="form-inline pull-right">
+            <div class="form-group">
+              <input type="text" [(ngModel)]="client.balance" name="balance" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-left:10px">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    
+    <div class="container">
+      <ul class="list-group">
+          <li class="list-group-item">Contact Email: {{client.email}}</li>
+          <li class="list-group-item">Contact Phone: {{client.phone}}</li>
+        </ul>
+    </div>
+    <br>
+  </div>
+</div>

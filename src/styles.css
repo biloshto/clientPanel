@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* so the flash messages would look better, without this they would have a space underneat the text  */
+.alert p {
+  margin:0;
+  padding: 0;
+}

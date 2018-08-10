@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">ClientPanel</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <!-- we want the Dashboard link to show only if the user is logged in -->
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link" href="#" routerLink="/">Dashboard</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <!-- we want the Register link to show only if the user is logged out and registration is allowed -->
+        <li *ngIf="!isLoggedIn && showRegister" class="nav-item">
+          <a class="nav-link" href="#" routerLink="/register">Register</a>
+        </li>
+        <!-- we want the Login link to show only if the user is logged out and registration is allowed -->
+        <li *ngIf="!isLoggedIn && showRegister" class="nav-item">
+          <a class="nav-link" href="#" routerLink="/login">Login</a>
+        </li>
+        <!-- we want to show the user that is logged in only if the user is logged in -->
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link" href="#">{{loggedInUser}}</a>
+        </li>
+        <!-- we want the Settings link to show only if the user is logged in -->
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link" href="#" routerLink="/settings">Settings</a>
+        </li>
+        <!-- we want the Logout link to show only if the user is logged in -->
+        <li *ngIf="isLoggedIn" class="nav-item">
+          <a class="nav-link" href="#" (click)="onLogoutClick()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br><br>
